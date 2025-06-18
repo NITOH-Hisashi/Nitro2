@@ -149,9 +149,9 @@ function msString(ms_date){
 	var ms_m = "0" + ms_date.getMinutes();
 	var ms_s = "0" + ms_date.getSeconds();
 	var ms_ms = "00" + ms_date.getMilliseconds();
-	ms_h = ms_h.substr(ms_h.length - 2, 2); //2桁にする
-	ms_m = ms_m.substr(ms_m.length - 2, 2); //2桁にする
-	ms_s = ms_s.substr(ms_s.length - 2, 2); //2桁にする
-	ms_ms = ms_ms.substr(ms_ms.length - 3, 3); //ミリ秒3桁にする
+	ms_h = ms_h.slice(-2); // 2桁にする
+	ms_m = ms_m.slice(-2); // 2桁にする
+	ms_s = ms_s.slice(-2); // 2桁にする
+	ms_ms = ms_ms.slice(-3); // ミリ秒3桁にする
 	return(ms_h + ":" + ms_m + ":" + ms_s + "." + ms_ms);
 }
