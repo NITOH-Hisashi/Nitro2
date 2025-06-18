@@ -145,20 +145,13 @@ function index_drow(){
 
 
 function msString(ms_date){
-	var ms_h = ms_date.getHours();
-	var ms_m = ms_date.getMinutes();
-	var ms_s = ms_date.getSeconds();
-	var ms_ms = ms_date.getMilliseconds();
-	if(ms_h < 10){
-		ms_h = "0" + ms_h;
-	}
-	if(ms_m < 10){
-		ms_m = "0" + ms_m;
-	}
-	if(ms_s < 10){
-		ms_s = "0" + ms_s;
-	}
-	var ms_msString = "00" + ms_ms;
-	ms_msString = ms_msString.substr(ms_msString.length - 3, 3); //ミリ秒3桁にする
-	return(ms_h + ":" + ms_m + ":" + ms_s + "." + ms_msString);
+	var ms_h = "0" + ms_date.getHours();
+	var ms_m = "0" + ms_date.getMinutes();
+	var ms_s = "0" + ms_date.getSeconds();
+	var ms_ms = "00" + ms_date.getMilliseconds();
+	ms_h = ms_h.substr(ms_h.length - 2, 2); //2桁にする
+	ms_m = ms_m.substr(ms_m.length - 2, 2); //2桁にする
+	ms_s = ms_s.substr(ms_s.length - 2, 2); //2桁にする
+	ms_ms = ms_ms.substr(ms_ms.length - 3, 3); //ミリ秒3桁にする
+	return(ms_h + ":" + ms_m + ":" + ms_s + "." + ms_ms);
 }
