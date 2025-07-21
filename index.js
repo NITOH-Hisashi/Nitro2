@@ -1,4 +1,4 @@
-﻿var audio = new Audio("jihou.mp3");
+﻿var audio = new Audio("Clock.mp3");
 var audio_flag = (new Date()).getHours();
 
 var index_r = 90;//角度
