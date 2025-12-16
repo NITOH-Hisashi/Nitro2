@@ -91,55 +91,59 @@ function index_drow(){
 	index_ctx.lineTo(index_x + index_l / 2, index_y3);
 	index_ctx.fill();//三角4
 
+	//中心点
+	const x = index_x + index_l / 2;
+	const y = index_y + index_l / 2;
 
 	//時針
 	var index_sr = ((new Date).getHours() + (new Date).getMinutes() / 60) / 12 * 360;
-	var index_sx = index_x + index_l / 2 + 0.7 * index_l / 2 * Math.cos((index_sr - 90) * Math.PI / 180);
-	var index_sy = index_y + index_l / 2 + 0.7 * index_l / 2 * Math.sin((index_sr - 90) * Math.PI / 180);
-	index_ctx.lineWidth = 9;
+	var index_sx = x + 0.7 * index_l / 2 * Math.cos((index_sr - 90) * Math.PI / 180);
+	var index_sy = y + 0.7 * index_l / 2 * Math.sin((index_sr - 90) * Math.PI / 180);
+	index_ctx.lineWidth = 20;
 	index_ctx.strokeStyle = "black";
 	index_ctx.beginPath();
-	index_ctx.moveTo(index_x + index_l / 2, index_y + index_l / 2);
+	index_ctx.moveTo(x, y);
 	index_ctx.lineTo(index_sx, index_sy);
 	index_ctx.stroke();
-	index_ctx.lineWidth = 3;
+	index_ctx.lineWidth = 16;
 	index_ctx.strokeStyle = "white";
-	index_ctx.lineTo(index_x + index_l / 2, index_y + index_l / 2);
+	index_ctx.lineTo(x, y);
 	index_ctx.stroke();
 
 	//分針
-	var index_sr = ((new Date).getSeconds() / 60 + (new Date).getMinutes()) / 60 * 360;
-	var index_sx = index_x + index_l / 2 + 0.9 * index_l / 2 * Math.cos((index_sr - 90) * Math.PI / 180);
-	var index_sy = index_y + index_l / 2 + 0.9 * index_l / 2 * Math.sin((index_sr - 90) * Math.PI / 180);
-	index_ctx.lineWidth = 9;
+	var minutes_sr = ((new Date).getSeconds() / 60 + (new Date).getMinutes()) / 60 * 360;
+	var minutes_sx = x + 0.9 * index_l / 2 * Math.cos((minutes_sr - 90) * Math.PI / 180);
+	var minutes_sy = y + 0.9 * index_l / 2 * Math.sin((minutes_sr - 90) * Math.PI / 180);
+	index_ctx.lineWidth = 12;
 	index_ctx.strokeStyle = "black";
 	index_ctx.beginPath();
-	index_ctx.moveTo(index_x + index_l / 2, index_y + index_l / 2);
-	index_ctx.lineTo(index_sx, index_sy);
+	index_ctx.moveTo(x, y);
+	index_ctx.lineTo(minutes_sx, minutes_sy);
 	index_ctx.stroke();
-	index_ctx.lineWidth = 3;
+	index_ctx.lineWidth = 8;
 	index_ctx.strokeStyle = "white";
-	index_ctx.lineTo(index_x + index_l / 2, index_y + index_l / 2);
+	index_ctx.lineTo(x, y);
 	index_ctx.stroke();
 
 	//秒針
-	var index_sr = ((new Date).getSeconds() + (new Date).getMilliseconds() / 1000) / 60 * 360;
-	var index_sx = index_x + index_l / 2 + index_l / 2 * Math.cos((index_sr - 90) * Math.PI / 180);
-	var index_sy = index_y + index_l / 2 + index_l / 2 * Math.sin((index_sr - 90) * Math.PI / 180);
+	var seconds_sr = ((new Date).getSeconds() + (new Date).getMilliseconds() / 1000) / 60 * 360;
+	var seconds_sx = x + index_l / 2 * Math.cos((seconds_sr - 90) * Math.PI / 180);
+	var seconds_sy = y + index_l / 2 * Math.sin((seconds_sr - 90) * Math.PI / 180);
+	index_ctx.lineWidth = 6;
 	index_ctx.strokeStyle = "green";
 	index_ctx.beginPath();
-	index_ctx.moveTo(index_x + index_l / 2, index_y + index_l / 2);
-	index_ctx.lineTo(index_sx, index_sy);
+	index_ctx.moveTo(x, y);
+	index_ctx.lineTo(seconds_sx, seconds_sy);
 	index_ctx.stroke();
 	index_ctx.lineWidth = 3;
 	index_ctx.strokeStyle = 'red';
-	index_ctx.lineTo(index_x + index_l / 2, index_y + index_l / 2);
+	index_ctx.lineTo(x, y);
 	index_ctx.stroke();
 
 	//時計文字列
 	index_ctx.lineWidth = 3;
-	index_ctx.font = index_l / 8 + "px serif";
-	index_ctx.strokeText(msString(new Date()), index_x + index_l / 8, index_y + index_l / 8);
+	index_ctx.font = index_l / 9 + "px serif";
+	index_ctx.strokeText(msString(new Date()), index_x + index_l / 6, y + index_l / 29);
 	index_ctx.lineWidth = 1;
 }
 
