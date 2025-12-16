@@ -13,34 +13,34 @@ var index_y3;
 //要素のサイズ指定チェック
 var index_size = true;
 var index_canvas = document.getElementById("index");
-if(index_canvas.width == 300 && index_canvas.height == 150){
+if (index_canvas.width == 300 && index_canvas.height == 150) {
 	index_size = false; //canvas要素のサイズ指定無し
 }
 
-document.onmousedown = function (e){
-	if(!e) e = window.event; // レガシー
+document.onmousedown = function (e) {
+	if (!e) e = window.event; // レガシー
 
 	// 出力テスト
 	audio.play();
 };
 
 
-var index_id = setInterval(index_drow, 43);
+var index_id = setInterval(index_draw, 43);
 
 
-function index_drow(){
-	if(audio_flag != (new Date()).getHours()){
+function index_draw() {
+	if (audio_flag != (new Date()).getHours()) {
 		audio.play();
 	}
 	audio_flag = (new Date()).getHours();
 
-	if(!index_size){
+	if (!index_size) {
 		index_canvas.width = window.innerWidth - 20;
 		index_canvas.height = window.innerHeight - 20;//最大化
 	}
 	index_l = index_canvas.width;
 	index_y = (index_canvas.height - index_l) / 2;
-	if(index_canvas.width > index_canvas.height){//横長画面
+	if (index_canvas.width > index_canvas.height) {//横長画面
 		index_l = index_canvas.height;
 		index_x = (index_canvas.width - index_l) / 2;//内接センタリング位置
 		index_y = 0;
@@ -148,7 +148,7 @@ function index_drow(){
 }
 
 
-function msString(ms_date){
+function msString(ms_date) {
 	var ms_h = "0" + ms_date.getHours();
 	var ms_m = "0" + ms_date.getMinutes();
 	var ms_s = "0" + ms_date.getSeconds();
@@ -157,5 +157,5 @@ function msString(ms_date){
 	ms_m = ms_m.slice(-2); // 2桁にする
 	ms_s = ms_s.slice(-2); // 2桁にする
 	ms_ms = ms_ms.slice(-3); // ミリ秒3桁にする
-	return(ms_h + ":" + ms_m + ":" + ms_s + "." + ms_ms);
+	return (ms_h + ":" + ms_m + ":" + ms_s + "." + ms_ms);
 }
