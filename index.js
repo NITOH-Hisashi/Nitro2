@@ -13,34 +13,34 @@ var index_y3;
 //要素のサイズ指定チェック
 var index_size = true;
 var index_canvas = document.getElementById("index");
-if(index_canvas.width == 300 && index_canvas.height == 150){
+if (index_canvas.width == 300 && index_canvas.height == 150) {
 	index_size = false; //canvas要素のサイズ指定無し
 }
 
-document.onmousedown = function (e){
-	if(!e) e = window.event; // レガシー
+document.onmousedown = function (e) {
+	if (!e) e = window.event; // レガシー
 
 	// 出力テスト
 	audio.play();
 };
 
 
-var index_id = setInterval(index_drow, 43);
+var index_id = setInterval(index_draw, 43);
 
 
-function index_drow(){
-	if(audio_flag != (new Date()).getHours()){
+function index_draw() {
+	if (audio_flag != (new Date()).getHours()) {
 		audio.play();
 	}
 	audio_flag = (new Date()).getHours();
 
-	if(!index_size){
+	if (!index_size) {
 		index_canvas.width = window.innerWidth - 20;
 		index_canvas.height = window.innerHeight - 20;//最大化
 	}
 	index_l = index_canvas.width;
 	index_y = (index_canvas.height - index_l) / 2;
-	if(index_canvas.width > index_canvas.height){//横長画面
+	if (index_canvas.width > index_canvas.height) {//横長画面
 		index_l = index_canvas.height;
 		index_x = (index_canvas.width - index_l) / 2;//内接センタリング位置
 		index_y = 0;
@@ -91,60 +91,64 @@ function index_drow(){
 	index_ctx.lineTo(index_x + index_l / 2, index_y3);
 	index_ctx.fill();//三角4
 
+	//中心点
+	const x = index_x + index_l / 2;
+	const y = index_y + index_l / 2;
 
 	//時針
 	var index_sr = ((new Date).getHours() + (new Date).getMinutes() / 60) / 12 * 360;
-	var index_sx = index_x + index_l / 2 + 0.7 * index_l / 2 * Math.cos((index_sr - 90) * Math.PI / 180);
-	var index_sy = index_y + index_l / 2 + 0.7 * index_l / 2 * Math.sin((index_sr - 90) * Math.PI / 180);
-	index_ctx.lineWidth = 9;
+	var index_sx = x + 0.7 * index_l / 2 * Math.cos((index_sr - 90) * Math.PI / 180);
+	var index_sy = y + 0.7 * index_l / 2 * Math.sin((index_sr - 90) * Math.PI / 180);
+	index_ctx.lineWidth = 20;
 	index_ctx.strokeStyle = "black";
 	index_ctx.beginPath();
-	index_ctx.moveTo(index_x + index_l / 2, index_y + index_l / 2);
+	index_ctx.moveTo(x, y);
 	index_ctx.lineTo(index_sx, index_sy);
 	index_ctx.stroke();
-	index_ctx.lineWidth = 3;
+	index_ctx.lineWidth = 16;
 	index_ctx.strokeStyle = "white";
-	index_ctx.lineTo(index_x + index_l / 2, index_y + index_l / 2);
+	index_ctx.lineTo(x, y);
 	index_ctx.stroke();
 
 	//分針
-	var index_sr = ((new Date).getSeconds() / 60 + (new Date).getMinutes()) / 60 * 360;
-	var index_sx = index_x + index_l / 2 + 0.9 * index_l / 2 * Math.cos((index_sr - 90) * Math.PI / 180);
-	var index_sy = index_y + index_l / 2 + 0.9 * index_l / 2 * Math.sin((index_sr - 90) * Math.PI / 180);
-	index_ctx.lineWidth = 9;
+	var minutes_sr = ((new Date).getSeconds() / 60 + (new Date).getMinutes()) / 60 * 360;
+	var minutes_sx = x + 0.9 * index_l / 2 * Math.cos((minutes_sr - 90) * Math.PI / 180);
+	var minutes_sy = y + 0.9 * index_l / 2 * Math.sin((minutes_sr - 90) * Math.PI / 180);
+	index_ctx.lineWidth = 12;
 	index_ctx.strokeStyle = "black";
 	index_ctx.beginPath();
-	index_ctx.moveTo(index_x + index_l / 2, index_y + index_l / 2);
-	index_ctx.lineTo(index_sx, index_sy);
+	index_ctx.moveTo(x, y);
+	index_ctx.lineTo(minutes_sx, minutes_sy);
 	index_ctx.stroke();
-	index_ctx.lineWidth = 3;
+	index_ctx.lineWidth = 8;
 	index_ctx.strokeStyle = "white";
-	index_ctx.lineTo(index_x + index_l / 2, index_y + index_l / 2);
+	index_ctx.lineTo(x, y);
 	index_ctx.stroke();
 
 	//秒針
-	var index_sr = ((new Date).getSeconds() + (new Date).getMilliseconds() / 1000) / 60 * 360;
-	var index_sx = index_x + index_l / 2 + index_l / 2 * Math.cos((index_sr - 90) * Math.PI / 180);
-	var index_sy = index_y + index_l / 2 + index_l / 2 * Math.sin((index_sr - 90) * Math.PI / 180);
+	var seconds_sr = ((new Date).getSeconds() + (new Date).getMilliseconds() / 1000) / 60 * 360;
+	var seconds_sx = x + index_l / 2 * Math.cos((seconds_sr - 90) * Math.PI / 180);
+	var seconds_sy = y + index_l / 2 * Math.sin((seconds_sr - 90) * Math.PI / 180);
+	index_ctx.lineWidth = 6;
 	index_ctx.strokeStyle = "green";
 	index_ctx.beginPath();
-	index_ctx.moveTo(index_x + index_l / 2, index_y + index_l / 2);
-	index_ctx.lineTo(index_sx, index_sy);
+	index_ctx.moveTo(x, y);
+	index_ctx.lineTo(seconds_sx, seconds_sy);
 	index_ctx.stroke();
 	index_ctx.lineWidth = 3;
 	index_ctx.strokeStyle = 'red';
-	index_ctx.lineTo(index_x + index_l / 2, index_y + index_l / 2);
+	index_ctx.lineTo(x, y);
 	index_ctx.stroke();
 
 	//時計文字列
 	index_ctx.lineWidth = 3;
-	index_ctx.font = index_l / 8 + "px serif";
-	index_ctx.strokeText(msString(new Date()), index_x + index_l / 8, index_y + index_l / 8);
+	index_ctx.font = index_l / 9 + "px serif";
+	index_ctx.strokeText(msString(new Date()), index_x + index_l / 6, y + index_l / 29);
 	index_ctx.lineWidth = 1;
 }
 
 
-function msString(ms_date){
+function msString(ms_date) {
 	var ms_h = "0" + ms_date.getHours();
 	var ms_m = "0" + ms_date.getMinutes();
 	var ms_s = "0" + ms_date.getSeconds();
@@ -153,5 +157,5 @@ function msString(ms_date){
 	ms_m = ms_m.slice(-2); // 2桁にする
 	ms_s = ms_s.slice(-2); // 2桁にする
 	ms_ms = ms_ms.slice(-3); // ミリ秒3桁にする
-	return(ms_h + ":" + ms_m + ":" + ms_s + "." + ms_ms);
+	return (ms_h + ":" + ms_m + ":" + ms_s + "." + ms_ms);
 }
