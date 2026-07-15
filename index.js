@@ -17,7 +17,7 @@ if (index_canvas.width == 300 && index_canvas.height == 150) {
 	index_size = false; //canvas要素のサイズ指定無し
 }
 
-alert('本アプリは音が出ますので、音量に注意してください。');
+alert('This app produces sound, so please be mindful of the volume.\n本アプリは音が出ますので、音量に注意してください。');
 
 document.onmousedown = function (e) {
 	if (!e) e = window.event; // レガシー
